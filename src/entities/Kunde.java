@@ -15,12 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.Session;
-
-import util.HibernateUtil;
-
 @Entity
-@SequenceGenerator(name = "KdNr", initialValue = 101)
 @Table(name = "Kunde")
 public class Kunde {
 
@@ -38,7 +33,7 @@ public class Kunde {
 
 	// nullable: erzeugt einen NOT-NULL Constraint, beim erstellen der Spalte
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KdNr_seq")
+	@GeneratedValue
 	@Column(name = "kdNr", unique = true, nullable = false)
 	public int getKundenNr() {
 		return kundenNr;

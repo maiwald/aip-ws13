@@ -6,6 +6,8 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
 import entities.Bankkonto;
+import entities.Kinokarte;
+import entities.Kinosaal;
 import entities.Kunde;
 
 
@@ -19,7 +21,11 @@ public class HibernateUtil
     {
         try
         {
-        	Configuration configuration = new Configuration().addAnnotatedClass(Kunde.class).addAnnotatedClass(Bankkonto.class);
+        	Configuration configuration = new Configuration();
+        	configuration.addAnnotatedClass(Kunde.class);
+        	configuration.addAnnotatedClass(Kinokarte.class);
+        	configuration.addAnnotatedClass(Kinosaal.class);
+        	configuration.addAnnotatedClass(Bankkonto.class);
         	
         	configuration.configure();
         	serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry(); 

@@ -6,6 +6,8 @@ import org.hibernate.Transaction;
 
 import util.HibernateUtil;
 import entities.Bankkonto;
+import entities.Kinokarte;
+import entities.Kinosaal;
 import entities.Kunde;
 
 public class Main {
@@ -13,12 +15,22 @@ public class Main {
 	public static void main(String[] args) {
 		Kunde newNeugebauer = new Kunde("Neugebauer");
 		Kunde newMaiwi = new Kunde("Maiwi");
+		
+		
 
-//		Bankkonto newKontoNeugebauer = new Bankkonto("DE1115");
-//		Bankkonto newKontoMaiwi = new Bankkonto("DE2226");
-//
-//		newNeugebauer.setBankkonto(newKontoNeugebauer);
-//		newMaiwi.setBankkonto(newKontoMaiwi);
+		Bankkonto newKontoNeugebauer = new Bankkonto("DE1115");
+		Bankkonto newKontoMaiwi = new Bankkonto("DE2226");
+
+		newNeugebauer.setBankkonto(newKontoNeugebauer);
+		newMaiwi.setBankkonto(newKontoMaiwi);
+		
+		
+		Kinosaal newKinosaal1 = new Kinosaal(1, 255);
+		Kinosaal newKinosaal2 = new Kinosaal(2, 255);
+		
+		Kinokarte newKinokarte1 = new Kinokarte();
+		
+		
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = null;
