@@ -31,7 +31,7 @@ public class BankkontoRepository {
 		return bank;
 	}
 	
-	public static int createBankaccount(Bankkonto konto){
+	public static String createBankaccount(Bankkonto konto){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.saveOrUpdate(konto);

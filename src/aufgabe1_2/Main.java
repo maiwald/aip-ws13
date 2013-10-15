@@ -14,8 +14,8 @@ public class Main {
 		Kunde newNeugebauer = new Kunde("Neugebauer");
 		Kunde newMaiwi = new Kunde("Maiwi");
 
-		Bankkonto newKontoNeugebauer = new Bankkonto("Neugebauer", 1115);
-		Bankkonto newKontoMaiwi = new Bankkonto("Maiwi", 2226);
+		Bankkonto newKontoNeugebauer = new Bankkonto("DE1115");
+		Bankkonto newKontoMaiwi = new Bankkonto("DE2226");
 
 		newNeugebauer.setBankkonto(newKontoNeugebauer);
 		newMaiwi.setBankkonto(newKontoMaiwi);

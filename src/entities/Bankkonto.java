@@ -15,40 +15,29 @@ import util.HibernateUtil;
 @Table(name = "Bankkonto", uniqueConstraints = { @UniqueConstraint(columnNames = "IBAN") })
 public class Bankkonto {
 
-	private int iban;
-	private String name;
+	private String iban;
 
 	public Bankkonto() {
 	}
 
-	// SO ?????
-	public Bankkonto(String kdName, int iban) {
-		this.name = kdName;
+	
+	public Bankkonto(String iban) {
 		this.iban = iban;
 	}
 
 	@Id
 	@GeneratedValue
 	@Column(name = "IBAN")
-	public int getIban() {
-		return iban;
+	public String getIban() {
+		return this.iban;
 	}
 
-	@Column(name = "Nachname")
-	public String getKunde() {
-		return name;
-	}
-
-	public void setKunde(String name) {
-		this.name = name;
-	}
-
-	public void setIban(int iban) {
+	public void setIban(String iban) {
 		this.iban = iban;
 	}
 
 	public String toString() {
-		return "Iban: " + getIban() + ", Name: " + getKunde();
+		return "Iban: " + getIban();
 	}
 
 }
