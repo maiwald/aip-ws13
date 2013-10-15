@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 
 @Entity
-@Table(name = "Bankkonto", uniqueConstraints = { @UniqueConstraint(columnNames = "IBAN") })
+@Table(name = "bankkonto", uniqueConstraints = { @UniqueConstraint(columnNames = "iban") })
 public class Bankkonto {
 
 	private String iban;
@@ -27,7 +27,7 @@ public class Bankkonto {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "IBAN")
+	@Column(name = "iban")
 	public String getIban() {
 		return this.iban;
 	}

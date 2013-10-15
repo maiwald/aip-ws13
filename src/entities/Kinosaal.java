@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -26,12 +25,12 @@ public class Kinosaal {
 	}
 
 	@Id
-	@Column(name = "SaalNr", nullable = false, length = 100)
+	@Column(name = "saalNr", nullable = false, length = 100)
 	public int getSaalNr() {
 		return saalNr;
 	}
 
-	@Column(name = "SaalGroesse", nullable = false, length = 100)
+	@Column(name = "saalGroesse", nullable = false, length = 100)
 	public int getGroesse() {
 		return groesse;
 	}
@@ -54,7 +53,7 @@ public class Kinosaal {
 	}
 
 	public String toString() {
-		return "SaalNr: " + getSaalNr() + "; Saalgröße: " + getGroesse();
+		return "SaalNr: " + getSaalNr() + "; Saalgroesse: " + getGroesse();
 	}
 
 }

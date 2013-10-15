@@ -25,17 +25,17 @@ public class Kinokarte {
 	}
 
 	// Mit @JoinColumn legen wir fest, dass in der Tabelle Kinokarte eine
-	// Fremdschlüsselspalte
+	// Fremdschl��sselspalte
 	// existiert. Da wir keinen Namen festlegen, verwendet Hibernate die Spalte
 	// kunde_id.
 	@ManyToOne
-	@JoinColumn(name = "KdNr", nullable = false)
+	@JoinColumn(name = "kdNr", nullable = false)
 	public Kunde getKunde() {
 		return kunde;
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "SaalNr", nullable = false)
+	@JoinColumn(name = "saalNr", nullable = false)
 	public Kinosaal getKinosaal() {
 		return kinosaal;
 	}

@@ -14,11 +14,11 @@ public class Main {
 		Kunde newNeugebauer = new Kunde("Neugebauer");
 		Kunde newMaiwi = new Kunde("Maiwi");
 
-		Bankkonto newKontoNeugebauer = new Bankkonto("DE1115");
-		Bankkonto newKontoMaiwi = new Bankkonto("DE2226");
-
-		newNeugebauer.setBankkonto(newKontoNeugebauer);
-		newMaiwi.setBankkonto(newKontoMaiwi);
+//		Bankkonto newKontoNeugebauer = new Bankkonto("DE1115");
+//		Bankkonto newKontoMaiwi = new Bankkonto("DE2226");
+//
+//		newNeugebauer.setBankkonto(newKontoNeugebauer);
+//		newMaiwi.setBankkonto(newKontoMaiwi);
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = null;

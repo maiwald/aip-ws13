@@ -20,7 +20,7 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 
 @Entity
-@SequenceGenerator(name = "kdNr", initialValue = 101)
+@SequenceGenerator(name = "KdNr", initialValue = 101)
 @Table(name = "Kunde")
 public class Kunde {
 
@@ -38,19 +38,19 @@ public class Kunde {
 
 	// nullable: erzeugt einen NOT-NULL Constraint, beim erstellen der Spalte
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KdNr")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KdNr_seq")
 	@Column(name = "kdNr", unique = true, nullable = false)
 	public int getKundenNr() {
 		return kundenNr;
 	}
 
-	@Column(name = "Nachname", nullable = false)
+	@Column(name = "nachname", nullable = false)
 	public String getName() {
 		return nachname;
 	}
 
 	@OneToOne
-	@JoinColumn(name = "IBAN")
+	@JoinColumn(name = "iban")
 	public Bankkonto getBankkonto() {
 		return this.bankkonto;
 	}
