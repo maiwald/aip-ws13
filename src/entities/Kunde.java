@@ -16,7 +16,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Kunde")
 public class Kunde {
 
 	private int kundenNr;
@@ -55,6 +54,7 @@ public class Kunde {
 	public Set<Kinokarte> getKinokarten() {
 		return this.kinokarten;
 	}
+	
 
 	public void setKundenNr(int kundenNr) {
 		this.kundenNr = kundenNr;
@@ -71,13 +71,11 @@ public class Kunde {
 	public void setKinokarten(Set<Kinokarte> kinokarten) {
 		this.kinokarten = kinokarten;
 	}
-
 	
-	public void addBankkonto(Bankkonto bankkonto) {
-		if (this.bankkonto == null) {
-			this.bankkonto = bankkonto;
-		}
+	public void addKinokarte(Kinokarte k) {
+		this.kinokarten.add(k);
 	}
+	
 
 	public String toString() {
 		return "KundenNr: " + getKundenNr() + "; Name: " + getName();

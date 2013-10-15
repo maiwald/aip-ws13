@@ -10,9 +10,9 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
  
- 		<property name="hbm2ddl.auto">create</property>
+ 		<property name="hibernate.hbm2ddl.auto">create</property>
         <!-- SQL dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
  
         <!-- JDBC connection pool (built-in) -->
         <property name="connection.pool_size">10</property>

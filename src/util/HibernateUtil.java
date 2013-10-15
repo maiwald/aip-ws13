@@ -26,7 +26,6 @@ public class HibernateUtil
         	configuration.addAnnotatedClass(Kinokarte.class);
         	configuration.addAnnotatedClass(Kinosaal.class);
         	configuration.addAnnotatedClass(Bankkonto.class);
-        	
         	configuration.configure();
         	serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry(); 
         	sessionfactory = configuration.buildSessionFactory(serviceRegistry);
