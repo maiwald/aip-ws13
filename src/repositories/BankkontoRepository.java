@@ -39,7 +39,7 @@ public class BankkontoRepository {
 		return konto.getIban();
 	}
 	
-	public static Bankkonto find(int iban) {
+	public static Bankkonto find(String iban) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Bankkonto bankkonto = (Bankkonto) session.get(Bankkonto.class, iban);

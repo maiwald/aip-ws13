@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import repositories.BankkontoRepository;
+import repositories.KundeRepository;
 import util.HibernateUtil;
 import entities.Bankkonto;
 import entities.Kinokarte;
@@ -13,6 +15,7 @@ import entities.Kunde;
 public class Main {
 
 	public static void main(String[] args) {
+		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = null;
 		Transaction transaction = null;
@@ -31,6 +34,7 @@ public class Main {
 		
 		newKinokarte1.setKinosaal(newKinosaal1);
 		newKinokarte1.setKunde(newNeugebauer);
+		
 
 		// Neuen Benutzer in Datenbank speichern:
 		try {
@@ -43,9 +47,12 @@ public class Main {
 
 			session.save(newKinosaal1);
 			session.save(newKinokarte1);
-
 			transaction.commit();
+            
+			
+			
 
+			BankkontoRepository.delete(newKontoNeugebauer);
 			session.close();
 		} catch (Exception e) {
 			// rollback(transaction);
