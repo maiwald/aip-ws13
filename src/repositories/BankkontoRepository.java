@@ -7,45 +7,42 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 import entities.Bankkonto;
 
-public class BankkontoRepository {
+public class BankkontoRepository extends HibernateRepository {
 
-	public static void delete(Bankkonto konto) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.delete(konto);
-		session.getTransaction().commit();
-	}
-	
-	public static void update(Bankkonto konto) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.merge(konto);
-		session.getTransaction().commit();
-	}
-
-	public static List<Bankkonto> getAllBankaccounts(){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Bankkonto> bank = session.createCriteria(Bankkonto.class).list();
-		session.getTransaction().commit();
-		return bank;
-	}
-	
-	public static String createBankaccount(Bankkonto konto){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	public static void create(Bankkonto konto) {
+		Session session = getCurrentSession();
 		session.beginTransaction();
 		session.saveOrUpdate(konto);
 		session.getTransaction().commit();
-		return konto.getIban();
 	}
-	
+
 	public static Bankkonto find(String iban) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Bankkonto bankkonto = (Bankkonto) session.get(Bankkonto.class, iban);
 		return bankkonto;
 	}
-	
-	
-	
+
+	public static List<Bankkonto> getAll() {
+		Session session = getCurrentSession();
+		session.beginTransaction();
+		List<Bankkonto> list = session.createCriteria(Bankkonto.class).list();
+		session.getTransaction().commit();
+		return list;
+	}
+
+	public static void update(Bankkonto konto) {
+		Session session = getCurrentSession();
+		session.beginTransaction();
+		session.merge(konto);
+		session.getTransaction().commit();
+	}
+
+	public static void delete(Bankkonto konto) {
+		Session session = getCurrentSession();
+		session.beginTransaction();
+		session.delete(konto);
+		session.getTransaction().commit();
+	}
+
 }

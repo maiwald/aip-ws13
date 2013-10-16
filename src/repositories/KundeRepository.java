@@ -4,48 +4,45 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import util.HibernateUtil;
 import entities.Kunde;
 
-public class KundeRepository {
+public class KundeRepository extends HibernateRepository {
 
-	
-	public static void delete(Kunde kunde) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	public static void create(Kunde kunde) {
+		Session session = getCurrentSession();
 		session.beginTransaction();
-		session.delete(kunde);
+		session.save(kunde);
 		session.getTransaction().commit();
-		
 	}
 
 	public static Kunde find(int kundennr) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = getCurrentSession();
 		session.beginTransaction();
 		Kunde kunde = (Kunde) session.get(Kunde.class, kundennr);
+		session.getTransaction().commit();
 		return kunde;
 	}
 
-	public static void update(Kunde kunde) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	public static List<Kunde> getAll() {
+		Session session = getCurrentSession();
 		session.beginTransaction();
-		session.merge(kunde);
+		List<Kunde> kunden = session.createCriteria(Kunde.class).list();
+		session.getTransaction().commit();
+		return kunden;
+	}
+
+	public static void update(Kunde kunde) {
+		Session session = getCurrentSession();
+		session.beginTransaction();
+		session.update(kunde);
 		session.getTransaction().commit();
 	}
 
-	
-	public static List<Kunde> getAllCustomers(){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	public static void delete(Kunde kunde) {
+		Session session = getCurrentSession();
 		session.beginTransaction();
-		List<Kunde> customers = session.createCriteria(Kunde.class).list();
+		session.delete(kunde);
 		session.getTransaction().commit();
-		return customers;
-	}
-	
-	public static int createCustomer(Kunde kunde){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.saveOrUpdate(kunde);
-		session.getTransaction().commit();
-		return kunde.getKundenNr();
+
 	}
 }

@@ -44,7 +44,6 @@ public class Kunde {
 	}
 
 	@OneToOne
-	@JoinColumn(name = "iban")
 	public Bankkonto getBankkonto() {
 		return this.bankkonto;
 	}

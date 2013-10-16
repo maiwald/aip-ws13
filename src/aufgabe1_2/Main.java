@@ -1,12 +1,11 @@
 package aufgabe1_2;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import java.util.List;
 
 import repositories.BankkontoRepository;
+import repositories.KinokarteRepository;
+import repositories.KinosaalRepository;
 import repositories.KundeRepository;
-import util.HibernateUtil;
 import entities.Bankkonto;
 import entities.Kinokarte;
 import entities.Kinosaal;
@@ -15,50 +14,38 @@ import entities.Kunde;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = null;
-		Transaction transaction = null;
 
-		Kunde newNeugebauer = new Kunde("Neugebauer");
-		Kunde newMaiwi = new Kunde("Maiwi");
+		// Kunde und Bankkonto
 
-		Bankkonto newKontoNeugebauer = new Bankkonto("DE1115");
-		Bankkonto newKontoMaiwi = new Bankkonto("DE2226");
+		Bankkonto bankkonto = new Bankkonto();
+		bankkonto.setIban("DE13849751983475");
+		BankkontoRepository.create(bankkonto);
 
-		newNeugebauer.setBankkonto(newKontoNeugebauer);
-		newMaiwi.setBankkonto(newKontoMaiwi);
+		Kunde kunde1 = new Kunde("Neugebauer");
+		kunde1.setBankkonto(bankkonto);
+		KundeRepository.create(kunde1);
 
-		Kinosaal newKinosaal1 = new Kinosaal(1, 255);
-		Kinokarte newKinokarte1 = new Kinokarte();
-		
-		newKinokarte1.setKinosaal(newKinosaal1);
-		newKinokarte1.setKunde(newNeugebauer);
-		
+		Kunde kunde2 = new Kunde("Buskobusko");
+		KundeRepository.create(kunde2);
 
-		// Neuen Benutzer in Datenbank speichern:
-		try {
-			session = sf.getCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(newKontoNeugebauer);
-			session.save(newKontoMaiwi);
-			session.save(newNeugebauer);
-			session.save(newMaiwi);
+		Kunde dbKunde1 = KundeRepository.find(kunde1.getKundenNr());
+		System.out.println(dbKunde1);
 
-			session.save(newKinosaal1);
-			session.save(newKinokarte1);
-			transaction.commit();
-            
-			
-			
+		List<Kunde> list = KundeRepository.getAll();
+		System.out.println(list);
 
-			BankkontoRepository.delete(newKontoNeugebauer);
-			session.close();
-		} catch (Exception e) {
-			// rollback(transaction);
-			System.out.println(e.getMessage());
-		}
+		kunde1.setName("Lempel");
+		KundeRepository.update(kunde1);
 
+		KundeRepository.delete(kunde2);
+
+		Kinosaal kinosaal = new Kinosaal(25, 3000);
+		KinosaalRepository.create(kinosaal);
+
+		Kinokarte kinokarte = new Kinokarte();
+		kinokarte.setKinosaal(kinosaal);
+		kinokarte.setKunde(kunde1);
+		KinokarteRepository.create(kinokarte);
 	}
 
 }
