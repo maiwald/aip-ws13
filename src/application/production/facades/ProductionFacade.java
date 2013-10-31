@@ -7,12 +7,15 @@ import application.production.business_logic.ProductProducer;
 import application.production.data_access.entities.ProductionOrder;
 import application.production.data_access.repositories.ProductionOrderRepository;
 
-
 public class ProductionFacade {
-	
-	public void produceOrder(OrderDTO orderDTO) {
+
+	public static void produceOrder(OrderDTO orderDTO) {
 		ProductionOrder productionOrder = ProductionOrderRepository.createProductionOrder(orderDTO);
 		PartDTO part = MaterialsManagementFacade.getPartById(productionOrder.getPartId());
 		ProductProducer.produceParts(part);
+	}
+
+	public static void printWorkSchedule(PartDTO partDTO) {
+		// TODO do stuff
 	}
 }

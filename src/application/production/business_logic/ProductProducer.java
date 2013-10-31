@@ -4,6 +4,7 @@ import java.util.List;
 
 import application.materials_management.data_access.entities.PartDTO;
 import application.materials_management.facades.MaterialsManagementFacade;
+import application.production.facades.ProductionFacade;
 
 public class ProductProducer {
 
@@ -12,6 +13,7 @@ public class ProductProducer {
 
 		for (PartDTO p : parts) {
 			produceParts(p);
+			ProductionFacade.printWorkSchedule(p);
 		}
 
 	}
