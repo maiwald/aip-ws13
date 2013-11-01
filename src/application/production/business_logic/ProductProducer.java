@@ -8,12 +8,20 @@ import application.production.facades.ProductionFacade;
 
 public class ProductProducer {
 
-	public static void produceParts(PartDTO part) {
-		List<PartDTO> parts = MaterialsManagementFacade.getPartsList(part.getId());
+    private final ProductionFacade production;
+    private final MaterialsManagementFacade materialsManagement;
+
+    public ProductProducer(MaterialsManagementFacade materialsManagement, ProductionFacade production) {
+        this.materialsManagement = materialsManagement;
+        this.production = production;
+    }
+
+	public void produceParts(PartDTO part) {
+		List<PartDTO> parts = materialsManagement.getPartsList(part.getId());
 
 		for (PartDTO p : parts) {
 			produceParts(p);
-			ProductionFacade.printWorkSchedule(p);
+			production.printWorkSchedule(p);
 		}
 
 	}

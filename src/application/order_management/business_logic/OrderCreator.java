@@ -6,11 +6,15 @@ import application.order_management.data_access.repositories.OrderRepository;
 import application.production.data_access.repositories.ProductionOrderRepository;
 
 public class OrderCreator {
-	public static Order createOrder(int offerId)
-	{
-		Order order = OrderRepository.createOrder(offerId);
+
+    private ProductionOrderRepository productionOrderRepository = new ProductionOrderRepository();
+    private OrderRepository orderRepository = new OrderRepository();
+
+	public Order createOrder(int offerId) {
+		Order order = orderRepository.createOrder(offerId);
 		OrderDTO orderDTO = order.createDTO();
-		ProductionOrderRepository.createProductionOrder(orderDTO); 
+		productionOrderRepository.createProductionOrder(orderDTO);
+
 		return order;
 	}
 }

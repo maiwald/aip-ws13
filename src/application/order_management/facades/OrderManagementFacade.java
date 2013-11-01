@@ -6,8 +6,10 @@ import application.order_management.data_access.entities.Order;
 
 public class OrderManagementFacade {
 
+    OrderCreator orderCreator = new OrderCreator();
+
 	public OrderDTO createOrder(int offerId) {
-		Order order = OrderCreator.createOrder(offerId);
+		Order order = orderCreator.createOrder(offerId);
 		return order.createDTO();
 	}
 }

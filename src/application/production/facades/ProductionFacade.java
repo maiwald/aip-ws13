@@ -9,13 +9,17 @@ import application.production.data_access.repositories.ProductionOrderRepository
 
 public class ProductionFacade {
 
-	public static void produceOrder(OrderDTO orderDTO) {
-		ProductionOrder productionOrder = ProductionOrderRepository.createProductionOrder(orderDTO);
-		PartDTO part = MaterialsManagementFacade.getPartById(productionOrder.getPartId());
-		ProductProducer.produceParts(part);
+    private MaterialsManagementFacade materialsManagement = new MaterialsManagementFacade();
+    private ProductionOrderRepository productionOrderRepository = new ProductionOrderRepository();
+    private ProductProducer productProducer = new ProductProducer(materialsManagement, this);
+
+    public void produceOrder(OrderDTO orderDTO) {
+		ProductionOrder productionOrder = productionOrderRepository.createProductionOrder(orderDTO);
+		PartDTO part = materialsManagement.getPartById(productionOrder.getPartId());
+		productProducer.produceParts(part);
 	}
 
-	public static void printWorkSchedule(PartDTO partDTO) {
+	public void printWorkSchedule(PartDTO partDTO) {
 		// TODO do stuff
 	}
 }

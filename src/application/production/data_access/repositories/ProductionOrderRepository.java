@@ -5,7 +5,7 @@ import application.production.data_access.entities.ProductionOrder;
 
 public class ProductionOrderRepository {
 	
-	static public ProductionOrder createProductionOrder(OrderDTO orderDTO) {
+	public ProductionOrder createProductionOrder(OrderDTO orderDTO) {
 		return new ProductionOrder(orderDTO);
 	}
 
