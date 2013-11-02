@@ -14,7 +14,7 @@ public class ProductionOrder {
     private int partId;
 
     public ProductionOrder(OrderDTO orderDTO) {
-        this.orderId = orderDTO.orderId;
+        this.orderId = orderDTO.getOrderId();
         this.partId = 2349085;
     }
 
