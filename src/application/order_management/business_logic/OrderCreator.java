@@ -10,10 +10,18 @@ public class OrderCreator {
     private ProductionOrderRepository productionOrderRepository = new ProductionOrderRepository();
     private OrderRepository orderRepository = new OrderRepository();
 
-	public Order createOrder(int offerId) {
+    public OrderCreator() {}
+
+    public OrderCreator(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    public Order createOrder(int offerId) {
 		Order order = orderRepository.createOrder(offerId);
-		OrderDTO orderDTO = order.createDTO();
-		productionOrderRepository.createProductionOrder(orderDTO);
+        if(order != null) {
+            OrderDTO orderDTO = order.createDTO();
+            productionOrderRepository.createProductionOrder(orderDTO);
+        }
 
 		return order;
 	}
