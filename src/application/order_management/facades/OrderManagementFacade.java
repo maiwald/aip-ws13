@@ -30,10 +30,14 @@ public class OrderManagementFacade {
     }
 
     private void validateOfferId(int offerId) {
-        if(offerId < 1)
-            throw new InvalidOfferIdException();
+        try {
+            if(offerId < 1)
+                throw new InvalidOfferIdError();
+        } catch (InvalidOfferIdError invalidOfferIdError) {
+            invalidOfferIdError.printStackTrace();
+        }
     }
 
-    public class InvalidOfferIdException extends RuntimeException {
+    public class InvalidOfferIdError extends Exception {
     }
 }

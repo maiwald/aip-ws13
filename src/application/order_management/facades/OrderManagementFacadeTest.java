@@ -24,7 +24,7 @@ public class OrderManagementFacadeTest {
         orderManagement = new OrderManagementFacade(orderCreatorMock);
     }
 
-    @Test(expected = OrderManagementFacade.InvalidOfferIdException.class)
+    @Test(expected = OrderManagementFacade.InvalidOfferIdError.class)
     public void createOrder_givenInvalidOfferId_throwsException() throws Exception {
         verifyNoMoreInteractions(orderCreatorMock);
         orderManagement.createOrder(-1);
