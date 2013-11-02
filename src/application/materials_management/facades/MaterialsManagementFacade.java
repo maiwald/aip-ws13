@@ -6,14 +6,14 @@ import java.util.List;
 import application.materials_management.data_access.entities.PartDTO;
 
 public class MaterialsManagementFacade {
-	public List<PartDTO> getPartsList(int partId) {
-		List<PartDTO> list = new ArrayList<PartDTO>();
-		list.add(new PartDTO(2345));
-		list.add(new PartDTO(12316));
-		return list;
-	}
+    public List<PartDTO> getPartsList(int partId) {
+        List<PartDTO> list = new ArrayList<PartDTO>();
+        list.add(new PartDTO(2345));
+        list.add(new PartDTO(12316));
+        return list;
+    }
 
-	public PartDTO getPartById(int partId) {
-		return new PartDTO(partId);
-	}
+    public PartDTO getPartById(int partId) {
+        return new PartDTO(partId);
+    }
 }

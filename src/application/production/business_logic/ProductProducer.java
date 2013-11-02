@@ -16,13 +16,13 @@ public class ProductProducer {
         this.production = production;
     }
 
-	public void produceParts(PartDTO part) {
-		List<PartDTO> parts = materialsManagement.getPartsList(part.getId());
+    public void produceParts(PartDTO part) {
+        List<PartDTO> parts = materialsManagement.getPartsList(part.getId());
 
-		for (PartDTO p : parts) {
-			produceParts(p);
-			production.printWorkSchedule(p);
-		}
+        for (PartDTO p : parts) {
+            produceParts(p);
+            production.printWorkSchedule(p);
+        }
 
-	}
+    }
 }
