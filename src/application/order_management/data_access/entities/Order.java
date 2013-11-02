@@ -2,17 +2,22 @@ package application.order_management.data_access.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import application.order_management.data_access.dtos.OrderDTO;
 
 @Entity
+@Table(name = "mpsOrder")
 public class Order {
 
     private int orderId;
     private int offerId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getOrderId() {
         return this.orderId;
     }
