@@ -10,11 +10,11 @@ public class OrderCreator {
     private ProductionOrderRepository productionOrderRepository = new ProductionOrderRepository();
     private OrderRepository orderRepository = new OrderRepository();
 
-	public Order createOrder(int offerId) {
-		Order order = orderRepository.createOrder(offerId);
-		OrderDTO orderDTO = order.createDTO();
-		productionOrderRepository.createProductionOrder(orderDTO);
+    public Order createOrder(int offerId) {
+        Order order = orderRepository.createOrder(offerId);
+        OrderDTO orderDTO = order.createDTO();
+        productionOrderRepository.createProductionOrder(orderDTO);
 
-		return order;
-	}
+        return order;
+    }
 }

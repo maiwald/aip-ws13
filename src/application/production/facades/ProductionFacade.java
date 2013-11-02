@@ -14,12 +14,12 @@ public class ProductionFacade {
     private ProductProducer productProducer = new ProductProducer(materialsManagement, this);
 
     public void produceOrder(OrderDTO orderDTO) {
-		ProductionOrder productionOrder = productionOrderRepository.createProductionOrder(orderDTO);
-		PartDTO part = materialsManagement.getPartById(productionOrder.getPartId());
-		productProducer.produceParts(part);
-	}
+        ProductionOrder productionOrder = productionOrderRepository.createProductionOrder(orderDTO);
+        PartDTO part = materialsManagement.getPartById(productionOrder.getPartId());
+        productProducer.produceParts(part);
+    }
 
-	public void printWorkSchedule(PartDTO partDTO) {
-		// TODO do stuff
-	}
+    public void printWorkSchedule(PartDTO partDTO) {
+        // TODO do stuff
+    }
 }
