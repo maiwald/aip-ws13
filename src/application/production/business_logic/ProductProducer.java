@@ -3,15 +3,15 @@ package application.production.business_logic;
 import java.util.List;
 
 import application.materials_management.data_access.entities.PartDTO;
-import application.materials_management.facades.MaterialsManagementFacade;
-import application.production.facades.ProductionFacade;
+import application.materials_management.facades.MaterialsManagement;
+import application.production.facades.Production;
 
 public class ProductProducer {
 
-    private final ProductionFacade production;
-    private final MaterialsManagementFacade materialsManagement;
+    private final Production production;
+    private final MaterialsManagement materialsManagement;
 
-    public ProductProducer(MaterialsManagementFacade materialsManagement, ProductionFacade production) {
+    public ProductProducer(MaterialsManagement materialsManagement, Production production) {
         this.materialsManagement = materialsManagement;
         this.production = production;
     }

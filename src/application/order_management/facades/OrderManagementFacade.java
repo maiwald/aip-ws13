@@ -7,7 +7,7 @@ import application.order_management.business_logic.OrderCreator;
 import application.order_management.data_access.dtos.OrderDTO;
 import application.order_management.data_access.entities.Order;
 
-public class OrderManagementFacade {
+public class OrderManagementFacade implements OrderManagement {
 
     OrderCreator orderCreator = new OrderCreator();
 
@@ -17,6 +17,7 @@ public class OrderManagementFacade {
 
     public OrderManagementFacade() {}
 
+    @Override
     public OrderDTO createOrder(int offerId) {
         Session session = SessionHelper.getSession();
         session.beginTransaction();

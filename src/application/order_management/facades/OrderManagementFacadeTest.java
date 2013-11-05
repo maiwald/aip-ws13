@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class OrderManagementFacadeTest {
 
     private OrderCreator orderCreatorMock;
-    private OrderManagementFacade orderManagement;
+    private OrderManagement orderManagement;
 
     @Before
     public void setUp() throws Exception {

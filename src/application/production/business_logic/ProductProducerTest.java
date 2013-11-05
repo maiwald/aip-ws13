@@ -1,7 +1,9 @@
 package application.production.business_logic;
 
 import application.materials_management.data_access.entities.PartDTO;
+import application.materials_management.facades.MaterialsManagement;
 import application.materials_management.facades.MaterialsManagementFacade;
+import application.production.facades.Production;
 import application.production.facades.ProductionFacade;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +15,8 @@ import static org.mockito.Mockito.*;
 
 public class ProductProducerTest {
 
-    private MaterialsManagementFacade materialsManagementMock;
-    private ProductionFacade productionMock;
+    private MaterialsManagement materialsManagementMock;
+    private Production productionMock;
     private ProductProducer productProducer;
     private PartDTO part;
     private final int id = 1;

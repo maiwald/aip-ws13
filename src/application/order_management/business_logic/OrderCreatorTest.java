@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import application.production.facades.Production;
 import org.junit.Test;
 
 import application.order_management.data_access.dtos.OrderDTO;
@@ -18,14 +19,14 @@ import application.production.facades.ProductionFacade;
 public class OrderCreatorTest {
 
     private OrderRepository orderRepository = mock(OrderRepository.class);
-    private ProductionFacade productionFacade = mock(ProductionFacade.class);
+    private Production production = mock(ProductionFacade.class);
 
     @Test
     public void createOrder_givenNonExistingOfferId_returnsNull() throws Exception {
         int nonExistingOfferId = 1999999999;
         when(orderRepository.createOrder(nonExistingOfferId)).thenReturn(null);
 
-        OrderCreator creator = new OrderCreator(orderRepository, productionFacade);
+        OrderCreator creator = new OrderCreator(orderRepository, production);
 
         assertThat(creator.createOrder(nonExistingOfferId), is(nullValue()));
     }
@@ -42,11 +43,11 @@ public class OrderCreatorTest {
         when(order.createDTO()).thenReturn(orderDTO);
         when(orderRepository.createOrder(existingOfferId)).thenReturn(order);
 
-        OrderCreator creator = new OrderCreator(orderRepository, productionFacade);
+        OrderCreator creator = new OrderCreator(orderRepository, production);
         assertThat(creator.createOrder(existingOfferId), is(instanceOf(Order.class)));
 
         verify(order).createDTO();
-        verify(productionFacade).produceOrder(orderDTO);
+        verify(production).produceOrder(orderDTO);
     }
 
 }

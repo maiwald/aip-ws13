@@ -5,10 +5,11 @@ import java.util.List;
 
 import application.materials_management.data_access.entities.PartDTO;
 
-public class MaterialsManagementFacade {
+public class MaterialsManagementFacade implements MaterialsManagement {
 
     public int count = 2;
 
+    @Override
     public List<PartDTO> getPartsList(int partId) {
         List<PartDTO> list = new ArrayList<PartDTO>();
 
@@ -21,6 +22,7 @@ public class MaterialsManagementFacade {
         return list;
     }
 
+    @Override
     public PartDTO getPartById(int partId) {
         return new PartDTO(partId);
     }
