@@ -1,6 +1,10 @@
 package loadbalancer;
 
 public class Instance {
+
+    public final int DEAD = -1;
+    public final int ALIVE = 1;
+
     private final int id;
     private final int status;
 
