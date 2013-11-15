@@ -10,9 +10,12 @@ public class OrderRepository {
         Order order = new Order();
         order.setOfferId(offerId);
 
-        Session session = SessionHelper.getSession();
-        session.save(order);
+        this.getSession().save(order);
 
         return order;
+    }
+
+    private Session getSession() {
+        return SessionHelper.getSession();
     }
 }

@@ -19,12 +19,13 @@ public class OrderManagementFacade implements OrderManagement {
 
     @Override
     public OrderDTO createOrder(int offerId) {
-        Session session = SessionHelper.getSession();
+        Session session = this.getSession();
         session.beginTransaction();
 
         validateOfferId(offerId);
         Order order = orderCreator.createOrder(offerId);
-        if(order == null) return null;
+        if (order == null)
+            return null;
 
         session.getTransaction().commit();
         return order.createDTO();
@@ -32,7 +33,7 @@ public class OrderManagementFacade implements OrderManagement {
 
     private void validateOfferId(int offerId) {
         try {
-            if(offerId < 1)
+            if (offerId < 1)
                 throw new InvalidOfferIdError();
         } catch (InvalidOfferIdError invalidOfferIdError) {
             invalidOfferIdError.printStackTrace();
@@ -40,5 +41,10 @@ public class OrderManagementFacade implements OrderManagement {
     }
 
     public class InvalidOfferIdError extends Exception {
+        private static final long serialVersionUID = 1L;
+    }
+
+    private Session getSession() {
+        return SessionHelper.getSession();
     }
 }
