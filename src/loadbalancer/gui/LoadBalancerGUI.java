@@ -26,7 +26,7 @@ public class LoadBalancerGUI {
         for(Instance instance: instances) {
             TrafficLight trafficLight = lights.get(instance.getId());
             if(trafficLight == null) {
-                trafficLight = new TrafficLight(instance);
+                trafficLight = new TrafficLight(instance.getId());
                 lights.put(instance.getId(), trafficLight);
             }
             trafficLight.update(instance.getStatus());
