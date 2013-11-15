@@ -8,14 +8,19 @@ import loadbalancer.Instance;
  * Time: 15:50
  */
 public class TrafficLight {
-    private Instance instance;
+    private int id;
+    private boolean status;
 
-    public TrafficLight(Instance instance) {
-        this.instance = instance;
+    public TrafficLight(int id) {
+        this.id = id;
     }
 
     public void update(int status) {
-
-
+        if(status == Instance.DEAD) {
+            this.status = false;
+        } else {
+            this.status = true;
+        }
+        // TODO update gui element
     }
 }
