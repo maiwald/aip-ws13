@@ -6,16 +6,17 @@ import util.SessionHelper;
 import application.order_management.business_logic.OrderCreator;
 import application.order_management.data_access.dtos.OrderDTO;
 import application.order_management.data_access.entities.Order;
+import application.order_management.data_access.repositories.OrderRepository;
+import application.production.facades.Production;
 
 public class OrderManagementFacade implements OrderManagement {
 
-    OrderCreator orderCreator = new OrderCreator();
+    private final OrderCreator orderCreator;
 
-    public OrderManagementFacade(OrderCreator orderCreator) {
-        this.orderCreator = orderCreator;
+    public OrderManagementFacade(Production production) {
+        OrderRepository orderRepository = new OrderRepository();
+        this.orderCreator = new OrderCreator(orderRepository, production);
     }
-
-    public OrderManagementFacade() {}
 
     @Override
     public OrderDTO createOrder(int offerId) {

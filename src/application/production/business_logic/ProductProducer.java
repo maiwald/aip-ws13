@@ -8,8 +8,8 @@ import application.production.facades.Production;
 
 public class ProductProducer {
 
-    private final Production production;
     private final MaterialsManagement materialsManagement;
+    private final Production production;
 
     public ProductProducer(MaterialsManagement materialsManagement, Production production) {
         this.materialsManagement = materialsManagement;

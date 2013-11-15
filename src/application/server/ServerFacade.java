@@ -11,8 +11,8 @@ import application.production.facades.ProductionFacade;
 public class ServerFacade {
 
     MaterialsManagement materialsManagement = new MaterialsManagementFacade();
-    OrderManagement orderManagement = new OrderManagementFacade();
-    Production production = new ProductionFacade();
+    Production production = new ProductionFacade(this.materialsManagement);
+    OrderManagement orderManagement = new OrderManagementFacade(this.production);
 
     public ServerFacade() {
         OrderDTO order = orderManagement.createOrder(2345);
