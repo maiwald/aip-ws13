@@ -6,45 +6,54 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Monitor extends Thread {
-    private final int serverPort = 65001;
+    private static final int SERVER_PORT = 65001;
 
-    private static List<Instance> instances = new ArrayList<Instance>();
+    private static Map<Integer, Instance> instances = new HashMap<Integer, Instance>();
 
     public static synchronized List<Instance> getInstances() {
-        return instances;
+        List<Instance> result = new ArrayList<Instance>();
+        result.addAll(instances.values());
+        return result;
     }
 
-    public static synchronized boolean addInstance(Instance i) {
-        return instances.add(i);
+    public static synchronized void addInstance(Instance instance) {
+        instances.put(instance.getId(), instance);
     }
 
     public Monitor() {
-
+        new MonitorThread().start();
     }
 
-    @Override
-    public void run() {
-        try {
-            ServerSocket serverSocket = new ServerSocket(this.serverPort);
-            serverSocket.setReuseAddress(true);
+    class MonitorThread extends Thread {
 
-            Socket socket;
+        @Override
+        public void run() {
+            try {
+                ServerSocket serverSocket = new ServerSocket(Monitor.SERVER_PORT);
+                serverSocket.setReuseAddress(true);
 
-            while (true) {
-                socket = serverSocket.accept();
-                handleRequest(socket);
+                Socket socket;
+
+                while (true) {
+                    socket = serverSocket.accept();
+                    handleRequest(socket);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    private void handleRequest(Socket socket) throws IOException {
-        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    }
+        private void handleRequest(Socket socket) throws IOException {
+            String input = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+            Instance i = new Instance(Integer.parseInt(input), 1);
+            Monitor.addInstance(i);
+        }
 
+    }
 }
