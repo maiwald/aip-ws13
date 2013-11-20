@@ -24,6 +24,10 @@ public class Instance {
         return status;
     }
 
+    public long getLifeTimeInSeconds() {
+        return ((new Date().getTime() - this.getLastConnected().getTime()) / 1000);
+    }
+
     public Date getLastConnected() {
         return lastConnected;
     }

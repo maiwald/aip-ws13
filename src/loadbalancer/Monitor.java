@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class Monitor extends Thread {
     private static final int SERVER_PORT = 65001;
+    private static final int INSTANCE_CLEANUP_DELAY = 3;
+    private static final int INSTANCE_LIFETIME = 10;
 
     private static Map<Integer, Instance> instances = new HashMap<Integer, Instance>();
 
@@ -25,8 +27,46 @@ public class Monitor extends Thread {
         instances.put(instance.getId(), instance);
     }
 
+    private static synchronized void removeInstance(Instance instance) {
+        instances.remove(instance.getId());
+    }
+
+    public static void main(String[] args) {
+        new Monitor();
+    }
+
     public Monitor() {
         new MonitorThread().start();
+        new CleanUpThread().start();
+    }
+
+    class CleanUpThread extends Thread {
+        public void run() {
+            try {
+                while (true) {
+                    Thread.sleep(Monitor.INSTANCE_CLEANUP_DELAY * 1000);
+                    cleanDeadInstances();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        private void cleanDeadInstances() {
+            for (Instance elem : getDeadInstances()) {
+                Monitor.removeInstance(elem);
+            }
+        }
+
+        private List<Instance> getDeadInstances() {
+            List<Instance> result = new ArrayList<Instance>();
+            for (Instance elem : Monitor.getInstances()) {
+                if (elem.getLifeTimeInSeconds() > Monitor.INSTANCE_LIFETIME)
+                    result.add(elem);
+            }
+            return result;
+        }
     }
 
     class MonitorThread extends Thread {
