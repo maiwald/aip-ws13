@@ -1,7 +1,7 @@
 package loadbalancer.gui;
 
 import loadbalancer.Instance;
-import loadbalancer.Monitor;
+import loadbalancer.monitor.Monitor;
 
 import java.util.HashMap;
 import java.util.List;
