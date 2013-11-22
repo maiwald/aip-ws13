@@ -9,4 +9,6 @@ public interface ServerInstance extends Remote {
     public OrderDTO createOrder(int offerId) throws RemoteException;
     public void start() throws RemoteException;
     public void stop() throws RemoteException;
+    public void mett() throws RemoteException;
+    
 }

@@ -1,7 +1,11 @@
 package application.server;
 
 import java.math.BigInteger;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.security.SecureRandom;
 
 import loadbalancer.monitor.Monitor;
@@ -37,8 +41,16 @@ public class ServerFacade implements ServerInstance {
         return new BigInteger(130, ServerFacade.random).toString(32).substring(0, 6);
     }
 
-    public static void main(String[] args) {
-        new ServerFacade("localhost", Monitor.SERVER_PORT);
+    public String getId() {
+        return this.serverId;
+    }
+
+    public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+        ServerFacade serverFacade = new ServerFacade("localhost", Monitor.SERVER_PORT);
+        ServerInstance stub = (ServerInstance) UnicastRemoteObject.exportObject(serverFacade, 0);
+        Registry registry = LocateRegistry.getRegistry();
+        registry.bind(serverFacade.getId(), stub);
+        serverFacade.start();
     }
 
     @Override
@@ -55,6 +67,12 @@ public class ServerFacade implements ServerInstance {
     @Override
     public void stop() throws RemoteException {
         this.ekg.interrupt();
+    }
+
+    @Override
+    public void mett() throws RemoteException {
+        System.out.println("MEEEEEEEEEEEEEEEEEEEEEETT");
+        
     }
 
 }

@@ -34,10 +34,15 @@ public class Monitor extends Thread {
 
         try {
             while (true) {
-                System.out.println(Monitor.getInstances());
+                //System.out.println(Monitor.getInstances());
+                for(Instance elem: Monitor.getInstances()){
+                    if(elem.getStatus()!=Instance.DEAD){
+                        elem.getStub().mett();
+                    }
+                }
                 Thread.sleep(2 * 1000);
             }
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
