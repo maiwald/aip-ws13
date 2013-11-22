@@ -8,7 +8,6 @@ public class LoadBalancerGUI extends Thread {
     private final TrafficGui gui;
 
     public static void main(String[] args) {
-        new Monitor().start();
         LoadBalancerGUI loadBalancerGUI = new LoadBalancerGUI();
 
         while (true) {

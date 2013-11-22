@@ -41,10 +41,16 @@ public class ServerPanel extends JPanel {
             }
         });
         this.add(button);
+        toggleTrafficLightStatus();
     }
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO switch instance on/off
+        if(instanceStatus() == Instance.ALIVE) {
+            gui.stop(instanceID);
+        } else {
+            gui.start(instanceID);
+        }
         toggleTrafficLightStatus();
     }
 

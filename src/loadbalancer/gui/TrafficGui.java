@@ -40,14 +40,27 @@ public class TrafficGui extends javax.swing.JFrame {
     }
 
     protected int getInstanceStatus(String instanceID) {
+        if (getInstance(instanceID) == null) return -1;
+        else return getInstance(instanceID).getStatus();
+    }
+
+    private Instance getInstance(String instanceID) {
         List<Instance> instances = Monitor.getInstances();
 
         for(Instance i: instances) {
-            if(i.getId() == instanceID) {
-                return i.getStatus();
+            if(i.getId().equals(instanceID)) {
+                return i;
             }
         }
-        return -1;
+        return null;
+    }
+
+    protected void start(String instanceID) {
+        getInstance(instanceID).start();
+    }
+
+    protected void stop(String instanceID) {
+        getInstance(instanceID).stop();
     }
 
     public void update() {
