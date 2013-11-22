@@ -10,16 +10,27 @@ import application.production.facades.ProductionFacade;
 
 public class ServerFacade {
 
-    MaterialsManagement materialsManagement = new MaterialsManagementFacade();
-    Production production = new ProductionFacade(this.materialsManagement);
-    OrderManagement orderManagement = new OrderManagementFacade(this.production);
+	MaterialsManagement materialsManagement = new MaterialsManagementFacade();
+	Production production = new ProductionFacade(this.materialsManagement);
+	OrderManagement orderManagement = new OrderManagementFacade(this.production);
 
-    public ServerFacade() {
-        OrderDTO order = orderManagement.createOrder(2345);
-        System.out.println(order);
-    }
+	public ServerFacade() {
+		OrderDTO order = orderManagement.createOrder(2345);
+		System.out.println(order);
+	}
 
-    public static void main(String[] args) {
-        new ServerFacade();
-    }
+	public static void main(String[] args) {
+		// new ServerFacade();
+		try {
+			int i = 4;
+			while (i >= 0) {
+				ServerEKG.sendLifeSign();
+				Thread.sleep(2 * 1000);
+				i--;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
