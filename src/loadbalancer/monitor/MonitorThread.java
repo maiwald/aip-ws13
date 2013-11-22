@@ -46,7 +46,7 @@ class MonitorThread extends Thread {
                 BufferedReader inBuffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String input = inBuffer.readLine();
-                Instance i = new Instance(Integer.parseInt(input));
+                Instance i = new Instance(input);
                 Monitor.addInstance(i);
 
                 this.socket.close();
