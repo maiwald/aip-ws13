@@ -20,6 +20,15 @@ public class Monitor extends Thread {
         return result;
     }
 
+    public static synchronized List<Instance> getAliveInstances() {
+        List<Instance> result = new ArrayList<Instance>();
+        for (Instance elem : getInstances()) {
+            if (elem.getStatus() != Instance.DEAD)
+                result.add(elem);
+        }
+        return result;
+    }
+
     static synchronized void addInstance(Instance instance) {
         instances.put(instance.getId(), instance);
     }

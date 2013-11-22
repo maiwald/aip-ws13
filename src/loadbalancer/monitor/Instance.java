@@ -63,9 +63,15 @@ public class Instance {
         }
     }
 
-    public ServerInstance getStub() throws AccessException, RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry();
-        return (ServerInstance) registry.lookup(this.id);
+    public ServerInstance getStub() {
+        ServerInstance instance = null;
+        try {
+            Registry registry = LocateRegistry.getRegistry();
+            instance = (ServerInstance) registry.lookup(this.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return instance;
     }
 
 }
