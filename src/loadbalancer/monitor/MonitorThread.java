@@ -10,49 +10,52 @@ import loadbalancer.Instance;
 
 class MonitorThread extends Thread {
 
-	@Override
-	public void run() {
-		try {
-			ServerSocket serverSocket = new ServerSocket(Monitor.SERVER_PORT);
-			serverSocket.setReuseAddress(true);
+    private boolean terminated = false;
 
-			while (true) {
-				Socket socket = serverSocket.accept();
-				new RequestHandlerThread(socket).start();
+    public void terminate() {
+        this.terminated = true;
+    }
 
-			}
+    @Override
+    public void run() {
+        try {
+            ServerSocket serverSocket = new ServerSocket(Monitor.SERVER_PORT);
+            serverSocket.setReuseAddress(true);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            while (!this.terminated) {
+                Socket socket = serverSocket.accept();
+                new RequestHandlerThread(socket).start();
+            }
 
-	private class RequestHandlerThread extends Thread {
-		private final Socket socket;
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-		public RequestHandlerThread(Socket socket) {
-			this.socket = socket;
-		}
+    private class RequestHandlerThread extends Thread {
+        private final Socket socket;
 
-		public void run() {
+        public RequestHandlerThread(Socket socket) {
+            this.socket = socket;
+        }
 
-			try {
-				BufferedReader inBuffer = new BufferedReader(new InputStreamReader(
-						socket.getInputStream()));
+        public void run() {
 
-				while (true) {
-					String input = inBuffer.readLine();
-					if (input != null) {
-						Instance i = new Instance(Integer.parseInt(input));
-						Monitor.addInstance(i);
-					}
-				}
+            try {
+                BufferedReader inBuffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+                String input = inBuffer.readLine();
+                Instance i = new Instance(Integer.parseInt(input));
+                Monitor.addInstance(i);
 
-		}
+                this.socket.close();
 
-	}
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
 }
