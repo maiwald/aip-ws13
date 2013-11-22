@@ -47,6 +47,22 @@ class Instance {
         return String.format("Instance: %s, Alive: %s", this.getId(), (this.status == DEAD ? "no" : "yes"));
     }
 
+    public void start() {
+        try {
+            getStub().start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stop() {
+        try {
+            getStub().stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ServerInstance getStub() throws AccessException, RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry();
         return (ServerInstance) registry.lookup(this.id);
