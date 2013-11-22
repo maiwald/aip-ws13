@@ -35,6 +35,15 @@ public class ServerFacade implements ServerInstance {
         this.serverId = generateId();
         this.monitorHost = monitorHost;
         this.monitorPort = monitorPort;
+
+        try {
+            ServerInstance stub = (ServerInstance) UnicastRemoteObject.exportObject(this, 0);
+            Registry registry = LocateRegistry.getRegistry();
+            registry.bind(this.getId(), stub);
+            this.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String generateId() {
@@ -46,11 +55,7 @@ public class ServerFacade implements ServerInstance {
     }
 
     public static void main(String[] args) throws RemoteException, AlreadyBoundException {
-        ServerFacade serverFacade = new ServerFacade("localhost", Monitor.SERVER_PORT);
-        ServerInstance stub = (ServerInstance) UnicastRemoteObject.exportObject(serverFacade, 0);
-        Registry registry = LocateRegistry.getRegistry();
-        registry.bind(serverFacade.getId(), stub);
-        serverFacade.start();
+        new ServerFacade("localhost", Monitor.SERVER_PORT);
     }
 
     @Override
