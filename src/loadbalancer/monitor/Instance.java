@@ -9,9 +9,10 @@ import java.util.Date;
 
 import application.server.ServerInstance;
 
-class Instance {
+public class Instance {
 
     public static final int DEAD = -1;
+    public static final int ALIVE = 1;
 
     private final String id;
     private int status;

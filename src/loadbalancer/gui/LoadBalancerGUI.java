@@ -1,36 +1,28 @@
 package loadbalancer.gui;
 
-import loadbalancer.monitor.Instance;
+
 import loadbalancer.monitor.Monitor;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class LoadBalancerGUI extends Thread {
 
-/**
- * User: felix_000
- * Date: 15.11.13
- * Time: 15:18
- */
-public class LoadBalancerGUI {
+    private final TrafficGui gui;
 
-    Map<Integer, TrafficLight> lights = new HashMap<Integer, TrafficLight>();
-    Monitor monitor;
+    public static void main(String[] args) {
+        new Monitor().start();
+        LoadBalancerGUI loadBalancerGUI = new LoadBalancerGUI();
 
-    public LoadBalancerGUI(Monitor monitor) {
-        this.monitor = monitor;
+        while (true) {
+            loadBalancerGUI.update();
+        }
+    }
+
+    public LoadBalancerGUI() {
+        this.gui = new TrafficGui(Monitor.getInstances());
+        gui.setVisible(true);
+
     }
 
     private void update() {
-        List<Instance> instances = monitor.getInstances();
-        for(Instance instance: instances) {
-            TrafficLight trafficLight = lights.get(instance.getId());
-            if(trafficLight == null) {
-                trafficLight = new TrafficLight(instance.getId());
-                lights.put(instance.getId(), trafficLight);
-            }
-            trafficLight.update(instance.getStatus());
-        }
-
+        gui.update();
     }
 }
