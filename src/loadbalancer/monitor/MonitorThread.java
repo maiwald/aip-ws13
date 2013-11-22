@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import loadbalancer.Instance;
-
 class MonitorThread extends Thread {
 
     private boolean terminated = false;

@@ -1,8 +1,8 @@
-package loadbalancer;
+package loadbalancer.monitor;
 
 import java.util.Date;
 
-public class Instance {
+class Instance {
 
     public static final int DEAD = -1;
 
@@ -32,7 +32,7 @@ public class Instance {
         return lastConnected;
     }
 
-    public void setStatusDead() {
+    void setStatusDead() {
         this.status = DEAD;
     }
 

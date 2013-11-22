@@ -1,6 +1,6 @@
 package loadbalancer.gui;
 
-import loadbalancer.Instance;
+import loadbalancer.monitor.Instance;
 import loadbalancer.monitor.Monitor;
 
 import java.util.HashMap;

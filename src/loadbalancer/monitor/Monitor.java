@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import loadbalancer.Instance;
-
 public class Monitor extends Thread {
+
     public static final int SERVER_PORT = 65001;
+
     static final int INSTANCE_CLEANUP_DELAY = 3;
     static final int INSTANCE_LIFETIME = 10;
 
@@ -20,17 +20,7 @@ public class Monitor extends Thread {
         return result;
     }
 
-    public static synchronized List<Instance> getAliveInstances() {
-        List<Instance> result = new ArrayList<Instance>();
-        for (Instance elem : getInstances()) {
-            if (elem.getStatus() != Instance.DEAD) {
-                result.add(elem);
-            }
-        }
-        return result;
-    }
-
-    public static synchronized void addInstance(Instance instance) {
+    static synchronized void addInstance(Instance instance) {
         instances.put(instance.getId(), instance);
     }
 
