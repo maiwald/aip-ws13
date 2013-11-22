@@ -17,7 +17,6 @@ public class ServerPanel extends JPanel {
         super();
         this.gui = gui;
         this.instanceID = instanceID;
-        this.guiStatus = gui.getInstanceStatus(instanceID);
 
         setLayout(new java.awt.GridLayout(2, 1));
         trafficLight.setBackground(new java.awt.Color(255, 0, 0));
@@ -41,22 +40,21 @@ public class ServerPanel extends JPanel {
             }
         });
         this.add(button);
-        toggleTrafficLightStatus();
+        setStatus(instanceStatus());
     }
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO switch instance on/off
         if(instanceStatus() == Instance.ALIVE) {
             gui.stop(instanceID);
         } else {
             gui.start(instanceID);
         }
-        toggleTrafficLightStatus();
+        setStatus(instanceStatus());
     }
 
     public void update() {
         if (needToUpdate()) {
-            toggleTrafficLightStatus();
+            setStatus(this.instanceStatus());
         }
     }
 
@@ -68,15 +66,14 @@ public class ServerPanel extends JPanel {
         return this.gui.getInstanceStatus(this.instanceID);
     }
 
-    private void toggleTrafficLightStatus() {
-        if (guiStatus == Instance.ALIVE) {
+    private void setStatus(int newStatus) {
+        if (newStatus == Instance.ALIVE) {
             trafficLight.setBackground(Color.green);
             button.setText("Switch off");
-            guiStatus = Instance.DEAD;
         } else {
             trafficLight.setBackground(Color.red);
             button.setText("Switch on");
-            guiStatus = Instance.ALIVE;
         }
+        guiStatus = newStatus;
     }
 }
