@@ -18,16 +18,19 @@ public class ServerFacade implements ServerInstance {
     private static SecureRandom random = new SecureRandom();
 
     private final String serverId;
-    private final Thread ekg;
+    private final String monitorHost;
+    private final int monitorPort;
+
+    private Thread ekg;
 
     private MaterialsManagement materialsManagement = new MaterialsManagementFacade();
     private Production production = new ProductionFacade(this.materialsManagement);
     private OrderManagement orderManagement = new OrderManagementFacade(this.production);
 
-    public ServerFacade(String monitorHostname, int monitorPort) {
+    public ServerFacade(String monitorHost, int monitorPort) {
         this.serverId = generateId();
-        this.ekg = new ServerEKG(this.serverId, monitorHostname, monitorPort);
-        this.ekg.start();
+        this.monitorHost = monitorHost;
+        this.monitorPort = monitorPort;
     }
 
     private String generateId() {
@@ -42,9 +45,15 @@ public class ServerFacade implements ServerInstance {
     public OrderDTO createOrder(int offerId) throws RemoteException {
         return orderManagement.createOrder(offerId);
     }
-    
+
     @Override
-    public void close() throws RemoteException {
+    public void start() throws RemoteException {
+        this.ekg = new ServerEKG(this.serverId, this.monitorHost, this.monitorPort);
+        this.ekg.start();
+    }
+
+    @Override
+    public void stop() throws RemoteException {
         this.ekg.interrupt();
     }
 
