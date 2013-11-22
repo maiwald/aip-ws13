@@ -9,7 +9,7 @@ import java.util.Date;
 
 import application.server.ServerInstance;
 
-class Instance {
+public class Instance {
 
     public static final int DEAD = -1;
 
