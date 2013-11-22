@@ -72,7 +72,7 @@ public class ServerFacade implements ServerInstance {
     @Override
     public void mett() throws RemoteException {
         System.out.println("MEEEEEEEEEEEEEEEEEEEEEETT");
-        
+
     }
 
 }
