@@ -5,57 +5,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import loadbalancer.Instance;
-
 public class Monitor extends Thread {
-	public static final int SERVER_PORT = 65001;
-	static final int INSTANCE_CLEANUP_DELAY = 3;
-	static final int INSTANCE_LIFETIME = 10;
 
-	private static Map<Integer, Instance> instances = new HashMap<Integer, Instance>();
+    public static final int SERVER_PORT = 65001;
 
-	public static synchronized List<Instance> getInstances() {
-		List<Instance> result = new ArrayList<Instance>();
-		result.addAll(instances.values());
-		return result;
-	}
+    static final int INSTANCE_CLEANUP_DELAY = 3;
+    static final int INSTANCE_LIFETIME = 10;
 
-	public static synchronized List<Instance> getAliveInstances() {
-		List<Instance> result = new ArrayList<Instance>();
-		for (Instance elem : getInstances()) {
-			if (elem.getStatus() != Instance.DEAD) {
-				result.add(elem);
-			}
-		}
-		return result;
-	}
+    private static Map<String, Instance> instances = new HashMap<String, Instance>();
 
-	public static synchronized void addInstance(Instance instance) {
-		instances.put(instance.getId(), instance);
-	}
+    public static synchronized List<Instance> getInstances() {
+        List<Instance> result = new ArrayList<Instance>();
+        result.addAll(instances.values());
+        return result;
+    }
 
-	private static synchronized void removeInstance(Instance instance) {
-		instances.remove(instance.getId());
-	}
+    static synchronized void addInstance(Instance instance) {
+        instances.put(instance.getId(), instance);
+    }
 
-	public static void main(String[] args) {
-		new Monitor();
-	}
+    public static void main(String[] args) {
+        new Monitor();
+    }
 
-	public Monitor() {
-		new MonitorThread().start();
-		new DeadInstanceMarkerThread().start();
+    public Monitor() {
+        new MonitorThread().start();
+        new DeadInstanceMarkerThread().start();
 
-		try {
-			while (true) {
-				System.out.println(Monitor.getInstances());
-				Thread.sleep(2 * 1000);
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	
+        try {
+            while (true) {
+                //System.out.println(Monitor.getInstances());
+                for(Instance elem: Monitor.getInstances()){
+                    if(elem.getStatus()!=Instance.DEAD){
+                        elem.getStub().mett();
+                    }
+                }
+                Thread.sleep(2 * 1000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -1,6 +1,6 @@
 package loadbalancer.gui;
 
-import loadbalancer.Instance;
+import loadbalancer.monitor.Instance;
 
 /**
  * User: felix_000
