@@ -40,19 +40,19 @@ public class Monitor extends Thread {
     public Monitor() {
         new MonitorThread().start();
         new DeadInstanceMarkerThread().start();
-
-        try {
-            while (true) {
-                System.out.println(Monitor.getInstances());
-                for (Instance elem : Monitor.getInstances()) {
-                    if (elem.getStatus() != Instance.DEAD) {
-                        elem.getStub().mett();
-                    }
+        new MonitorLogger().start();
+    }
+    
+    class MonitorLogger extends Thread {
+        public void run() {
+            try {
+                while (true) {
+                    System.out.println(Monitor.getInstances());
+                    Thread.sleep(2 * 1000);
                 }
-                Thread.sleep(2 * 1000);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

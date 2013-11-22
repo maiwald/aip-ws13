@@ -21,6 +21,14 @@ public class Dispatcher {
         return result;
     }
 
+    public void mett() {
+        try {
+            getNextInstance().mett();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private ServerInstance getNextInstance() {
         List<Instance> instances = Monitor.getAliveInstances();
         Instance instance = instances.get(this.callCount % instances.size());
