@@ -1,6 +1,6 @@
 package application.materials_management.facades;
 
-import application.materials_management.data_access.entities.PartDTO;
+import application.materials_management.data_access.dtos.PartDTO;
 
 import java.util.List;
 

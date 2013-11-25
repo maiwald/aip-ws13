@@ -1,10 +1,11 @@
 package application.production.business_logic;
 
-import application.materials_management.data_access.entities.PartDTO;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.materials_management.facades.MaterialsManagement;
 import application.materials_management.facades.MaterialsManagementFacade;
 import application.production.facades.Production;
 import application.production.facades.ProductionFacade;
+
 import org.junit.Before;
 import org.junit.Test;
 

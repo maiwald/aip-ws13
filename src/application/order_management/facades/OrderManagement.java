@@ -1,5 +1,6 @@
 package application.order_management.facades;
 
+import application.order_management.data_access.dtos.OfferDTO;
 import application.order_management.data_access.dtos.OrderDTO;
 
 /**
@@ -9,4 +10,6 @@ import application.order_management.data_access.dtos.OrderDTO;
  */
 public interface OrderManagement {
     OrderDTO createOrder(int offerId);
+    OfferDTO createOffer();
+    //CustomerDTO createCustomer(String name, String street, String houseNr, int postcode);
 }

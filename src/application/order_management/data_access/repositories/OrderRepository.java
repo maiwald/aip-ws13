@@ -6,7 +6,8 @@ import util.SessionHelper;
 import application.order_management.data_access.entities.Order;
 
 public class OrderRepository {
-    public Order createOrder(int offerId) {
+    
+    public Order createOrder() {
         Order order = new Order();
         order.setOfferId(offerId);
 

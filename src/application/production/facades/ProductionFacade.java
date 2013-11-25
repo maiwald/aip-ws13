@@ -1,6 +1,6 @@
 package application.production.facades;
 
-import application.materials_management.data_access.entities.PartDTO;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.materials_management.facades.MaterialsManagement;
 import application.order_management.data_access.dtos.OrderDTO;
 import application.production.business_logic.ProductProducer;

@@ -3,7 +3,7 @@ package application.materials_management.facades;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.materials_management.data_access.entities.PartDTO;
+import application.materials_management.data_access.dtos.PartDTO;
 
 public class MaterialsManagementFacade implements MaterialsManagement {
 

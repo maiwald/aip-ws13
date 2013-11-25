@@ -2,7 +2,7 @@ package application.production.business_logic;
 
 import java.util.List;
 
-import application.materials_management.data_access.entities.PartDTO;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.materials_management.facades.MaterialsManagement;
 import application.production.facades.Production;
 

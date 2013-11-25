@@ -1,4 +1,4 @@
-package application.materials_management.data_access.entities;
+package application.materials_management.data_access.dtos;
 
 public class PartDTO {
 
