@@ -6,7 +6,6 @@ import java.util.Map;
 import org.hibernate.Session;
 
 import util.SessionHelper;
-import application.customer_management.data_access.entities.Customer;
 import application.customer_management.facade.CustomerManagement;
 import application.materials_management.data_access.entities.Part;
 import application.order_management.business_logic.OfferCreator;
