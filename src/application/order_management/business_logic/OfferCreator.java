@@ -10,7 +10,7 @@ import application.order_management.data_access.repositories.OfferRepository;
 
 public class OfferCreator {
 
-    private static OfferRepository offerRepository;
+    private final OfferRepository offerRepository;
     
     public OfferCreator(OfferRepository offerRepository){
         this.offerRepository = offerRepository;
