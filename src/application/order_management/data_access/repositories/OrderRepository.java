@@ -7,7 +7,7 @@ import application.order_management.data_access.entities.Order;
 
 public class OrderRepository {
     
-    public Order createOrder() {
+    public Order createOrder(int offerId) {
         Order order = new Order();
         order.setOfferId(offerId);
 

@@ -6,7 +6,6 @@ import java.util.Map;
 import org.hibernate.Session;
 
 import util.SessionHelper;
-import application.customer_management.facade.CustomerManagement;
 import application.materials_management.data_access.entities.Part;
 import application.order_management.business_logic.OfferCreator;
 import application.order_management.business_logic.OrderCreator;
@@ -22,12 +21,12 @@ public class OrderManagementFacade implements OrderManagement {
 
     private final OrderCreator orderCreator;
     private final OfferCreator offerCreator;
-    private final CustomerManagement customerManagement; 
+
     
-    public OrderManagementFacade(Production production, CustomerManagement customerManagement) {
+    public OrderManagementFacade(Production production) {
         OrderRepository orderRepository = new OrderRepository();
         OfferRepository offerRepository = new OfferRepository();
-        this.customerManagement = customerManagement;
+        
         
         this.offerCreator = new OfferCreator(offerRepository);
         this.orderCreator = new OrderCreator(orderRepository, production);
