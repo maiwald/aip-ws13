@@ -2,7 +2,6 @@ package application.order_management.data_access.entities;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import application.materials_management.data_access.dtos.PartDTO;
 import application.order_management.data_access.dtos.OfferDTO;
 
 @Entity
@@ -20,14 +18,14 @@ public class Offer {
 
     private Integer offerId;
     private Integer customerId;
-    private Map<PartDTO, Integer> partlist;
+    private Integer partId;
     private Date validUntil;
     private Date offerDate;
     private double price;
 
-    public Offer(Integer customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) {
+    public Offer(Integer customerId, Integer partId, Date validUntil, double price) {
         this.customerId = customerId;
-        this.partlist = partlist;
+        this.partId = partId;
         this.validUntil = validUntil;
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -61,12 +59,12 @@ public class Offer {
     }
 
     @Column
-    public Map<PartDTO, Integer> getPartlist() {
-        return partlist;
+    public Integer getPartId() {
+        return partId;
     }
 
-    public void setPartlist(Map<PartDTO, Integer> partlist) {
-        this.partlist = partlist;
+    public void setPartId(Integer partId) {
+        this.partId = partId;
     }
 
     @Column
@@ -97,6 +95,6 @@ public class Offer {
     }
 
     public OfferDTO createDTO() {
-        return new OfferDTO(this.customerId, this.partlist, this.offerDate, this.validUntil, this.price);
+        return new OfferDTO(this.customerId, this.partId, this.offerDate, this.validUntil, this.price);
     }
 }

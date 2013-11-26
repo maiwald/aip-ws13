@@ -1,5 +1,7 @@
 package application.production.data_access.dtos;
 
-public class ProductionOrderDTO {
+import java.io.Serializable;
+
+public class ProductionOrderDTO implements Serializable {
 
 }

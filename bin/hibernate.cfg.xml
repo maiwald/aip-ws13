@@ -25,6 +25,7 @@
  
         <!-- Mapping files -->
         <mapping class="application.order_management.data_access.entities.Order"/>
+        <mapping class="application.order_management.data_access.entities.Offer"/>
         <mapping class="application.production.data_access.entities.ProductionOrder"/>
         
     </session-factory>

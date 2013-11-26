@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import loadbalancer.monitor.Instance;
 import loadbalancer.monitor.Monitor;
-import application.materials_management.data_access.dtos.PartDTO;
 import application.order_management.data_access.dtos.OfferDTO;
 import application.order_management.data_access.dtos.OrderDTO;
 import application.server.ServerInstance;
@@ -23,8 +21,8 @@ public class Dispatcher implements ServerInstance, Serializable {
     }
 
     @Override
-    public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException {
-        return this.getNextInstance().createOffer(customerId, partlist, validUntil, price);
+    public OfferDTO createOffer(int customerId, Integer partId, Date validUntil, double price) throws RemoteException {
+        return this.getNextInstance().createOffer(customerId, partId, validUntil, price);
     }
 
     @Override

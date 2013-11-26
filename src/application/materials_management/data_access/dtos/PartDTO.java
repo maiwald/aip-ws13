@@ -1,6 +1,8 @@
 package application.materials_management.data_access.dtos;
 
-public class PartDTO {
+import java.io.Serializable;
+
+public class PartDTO implements Serializable {
 
     private final int partId;
 

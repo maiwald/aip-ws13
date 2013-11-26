@@ -5,17 +5,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import application.order_management.business_logic.OrderCreator;
 import application.order_management.data_access.dtos.OrderDTO;
-import application.order_management.data_access.entities.Order;
 import application.production.facades.Production;
 
 public class OrderManagementFacadeTest {

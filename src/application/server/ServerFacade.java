@@ -8,10 +8,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.SecureRandom;
 import java.util.Date;
-import java.util.Map;
 
 import loadbalancer.monitor.Monitor;
-import application.materials_management.data_access.dtos.PartDTO;
 import application.materials_management.facades.MaterialsManagement;
 import application.materials_management.facades.MaterialsManagementFacade;
 import application.order_management.data_access.dtos.OfferDTO;
@@ -71,9 +69,9 @@ public class ServerFacade implements ServerInstance {
     }
 
     @Override
-    public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException {
+    public OfferDTO createOffer(int customerId, Integer partId, Date validUntil, double price) throws RemoteException {
         this.logRequest("createOffer");
-        return orderManagement.createOffer(customerId, partlist, validUntil, price);
+        return orderManagement.createOffer(customerId, partId, validUntil, price);
     }
 
     @Override

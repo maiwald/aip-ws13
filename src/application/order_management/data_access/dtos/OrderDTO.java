@@ -1,6 +1,8 @@
 package application.order_management.data_access.dtos;
 
-public class OrderDTO {
+import java.io.Serializable;
+
+public class OrderDTO implements Serializable {
 
     private final int orderId;
 

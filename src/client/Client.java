@@ -13,7 +13,7 @@ public class Client {
         try {
             Registry registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
             ServerInstance server = (ServerInstance) registry.lookup("MPS");
-            server.createOffer(133, new HashMap<PartDTO, Integer>(), new Date(), 4.8);
+            server.createOffer(423, 7, new Date(), 4.2);
             server.createOrder(123);
         } catch (Exception e) {
             e.printStackTrace();

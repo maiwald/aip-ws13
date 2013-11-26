@@ -1,6 +1,8 @@
 package application.customer_management.data_access.dtos;
 
-public class CustomerDTO {
+import java.io.Serializable;
+
+public class CustomerDTO implements Serializable {
 
     private final int customerID;
     private final String name;
