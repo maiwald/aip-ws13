@@ -7,10 +7,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.SecureRandom;
+import java.util.Date;
+import java.util.Map;
 
 import loadbalancer.monitor.Monitor;
+import application.materials_management.data_access.entities.Part;
 import application.materials_management.facades.MaterialsManagement;
 import application.materials_management.facades.MaterialsManagementFacade;
+import application.order_management.data_access.dtos.OfferDTO;
 import application.order_management.data_access.dtos.OrderDTO;
 import application.order_management.facades.OrderManagement;
 import application.order_management.facades.OrderManagementFacade;
@@ -66,6 +70,11 @@ public class ServerFacade implements ServerInstance {
     }
 
     @Override
+    public OfferDTO createOffer(int customerId, Map<Part, Integer> partlist, Date validUntil, double price) throws RemoteException {
+        return orderManagement.createOffer(customerId, partlist, validUntil, price);
+    }
+
+    @Override
     public void start() throws RemoteException {
         this.ekg = new ServerEKG(this);
         this.running = true;
@@ -75,12 +84,6 @@ public class ServerFacade implements ServerInstance {
     @Override
     public void stop() throws RemoteException {
         this.running = false;
-    }
-
-    @Override
-    public void mett() throws RemoteException {
-        System.out.println("MEEEEEEEEEEEEEEEEEEEEEETT");
-
     }
 
 }
