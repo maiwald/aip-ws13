@@ -13,12 +13,12 @@ public class ServerPanel extends JPanel {
     private TrafficGui gui;
     JPanel trafficLight = new JPanel();
     JButton button = new JButton();
-    private String instanceID;
+    private Instance instance;
 
-    public ServerPanel(TrafficGui gui, String instanceID) {
+    public ServerPanel(TrafficGui gui, Instance instance) {
         super();
         this.gui = gui;
-        this.instanceID = instanceID;
+        this.instance = instance;
 
         setLayout(new java.awt.GridLayout(2, 1));
         trafficLight.setBackground(new java.awt.Color(255, 0, 0));
@@ -38,28 +38,20 @@ public class ServerPanel extends JPanel {
     }
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        if (instanceStatus() == Instance.ALIVE) {
-            gui.stop(instanceID);
+        if (this.instance.isAlive()) {
+            this.instance.stop();
         } else {
-            gui.start(instanceID);
+            this.instance.start();
         }
     }
 
     public void update() {
-        updateUi(this.instanceStatus());
-    }
-
-    private int instanceStatus() {
-        return this.gui.getInstanceStatus(this.instanceID);
-    }
-
-    private void updateUi(int newStatus) {
-        if (newStatus == Instance.ALIVE) {
+        if (this.instance.isAlive()) {
             trafficLight.setBackground(Color.green);
-            button.setText("Switch off " + this.instanceID);
+            button.setText("Switch off:\n" + this.instance.getId());
         } else {
             trafficLight.setBackground(Color.red);
-            button.setText("Switch on " + this.instanceID);
+            button.setText("Switch on:\n" + this.instance.getId());
         }
     }
 }

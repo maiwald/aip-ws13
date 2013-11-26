@@ -22,9 +22,9 @@ public class Monitor extends Thread {
 
     public static List<Instance> getAliveInstances() {
         List<Instance> result = new ArrayList<Instance>();
-        for (Instance elem : getInstances()) {
-            if (elem.getStatus() != Instance.DEAD)
-                result.add(elem);
+        for (Instance instance : getInstances()) {
+            if (instance.isAlive())
+                result.add(instance);
         }
         return result;
     }

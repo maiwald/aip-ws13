@@ -8,15 +8,11 @@ import application.server.ServerInstance;
 
 public class Instance {
 
-    public static final int DEAD = -1;
-    public static final int ALIVE = 1;
-
     private final String id;
-    private int status = ALIVE;
+    private Date lastConnected = new Date();
 
     private Date onlineSince = new Date();
     private Date offlineSince = null;
-    private Date lastConnected = new Date();
 
     public Instance(String id) {
         this.id = id;
@@ -26,8 +22,12 @@ public class Instance {
         return id;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean isAlive() {
+        return onlineSince != null && offlineSince == null;
+    }
+    
+    public boolean isDead() {
+        return !isAlive();
     }
 
     public long getMillisecondsSinceLastLifesign() {
@@ -35,10 +35,12 @@ public class Instance {
     }
 
     public long getSecondsOnline() {
+        if (this.onlineSince == null) return -1;
         return ((new Date().getTime() - this.onlineSince.getTime()) / 1000);
     }
 
     public long getSecondsOffline() {
+        if (this.offlineSince == null) return -1;
         return ((new Date().getTime() - this.offlineSince.getTime()) / 1000);
     }
 
@@ -47,23 +49,21 @@ public class Instance {
     }
 
     void setAlive() {
-        if (this.status == DEAD) {
-            this.status = ALIVE;
+        if (this.isDead()) {
             this.offlineSince = null;
             this.onlineSince = new Date();
         }
     }
 
     void setDead() {
-        if (this.status == ALIVE) {
-            this.status = DEAD;
+        if (this.isAlive()) {
             this.offlineSince = new Date();
             this.onlineSince = null;
         }
     }
 
     public String toString() {
-        return String.format("Instance: %s, Alive: %s", this.getId(), (this.status == DEAD ? "no" : "yes"));
+        return String.format("Instance: %s, Alive: %s", this.getId(), (this.isAlive() ? "yes" : "no"));
     }
 
     public void start() {

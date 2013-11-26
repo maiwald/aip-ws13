@@ -1,12 +1,12 @@
 package loadbalancer.gui;
 
-import loadbalancer.monitor.Instance;
-import loadbalancer.monitor.Monitor;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+import loadbalancer.monitor.Instance;
 
 public class TrafficGui extends javax.swing.JFrame {
 
@@ -15,7 +15,6 @@ public class TrafficGui extends javax.swing.JFrame {
     public TrafficGui(List<Instance> instances) {
         initComponents(instances);
     }
-
 
     private void initComponents(List<Instance> instances) {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -26,11 +25,11 @@ public class TrafficGui extends javax.swing.JFrame {
 
         serverPanels = new ArrayList<ServerPanel>();
 
-        for(Instance i: instances) {
-            serverPanels.add(new ServerPanel(this, i.getId()));
+        for (Instance i : instances) {
+            serverPanels.add(new ServerPanel(this, i));
         }
 
-        for(JPanel p: serverPanels) {
+        for (JPanel p : serverPanels) {
             orderList.add(p);
         }
 
@@ -39,35 +38,10 @@ public class TrafficGui extends javax.swing.JFrame {
         pack();
     }
 
-    protected int getInstanceStatus(String instanceID) {
-        if (getInstance(instanceID) == null) return -1;
-        else return getInstance(instanceID).getStatus();
-    }
-
-    private Instance getInstance(String instanceID) {
-        List<Instance> instances = Monitor.getInstances();
-
-        for(Instance i: instances) {
-            if(i.getId().equals(instanceID)) {
-                return i;
-            }
-        }
-        return null;
-    }
-
-    protected void start(String instanceID) {
-        getInstance(instanceID).start();
-    }
-
-    protected void stop(String instanceID) {
-        getInstance(instanceID).stop();
-    }
-
     public void update() {
-        for(ServerPanel panel: serverPanels) {
+        for (ServerPanel panel : serverPanels) {
             panel.update();
         }
     }
-
 
 }
