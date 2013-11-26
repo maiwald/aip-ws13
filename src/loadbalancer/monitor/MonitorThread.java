@@ -43,10 +43,15 @@ class MonitorThread extends Thread {
             try {
                 BufferedReader inBuffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                String input = inBuffer.readLine();
-                Instance i = new Instance(input);
-                Monitor.addInstance(i);
-
+                String id = inBuffer.readLine();
+                if (Monitor.instances.containsKey(id)) {
+                    Instance i = Monitor.instances.get(id);
+                    i.updateLastConnected();
+                    i.setAlive();
+                } else {
+                    Instance i = new Instance(id);
+                    Monitor.addInstance(i);
+                }
                 this.socket.close();
 
             } catch (IOException e) {

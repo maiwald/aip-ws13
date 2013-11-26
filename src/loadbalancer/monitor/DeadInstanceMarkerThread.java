@@ -17,14 +17,14 @@ class DeadInstanceMarkerThread extends Thread {
 
     private void setDeadInstances() {
         for (Instance elem : getDeadInstances()) {
-            elem.setStatusDead();
+            elem.setDead();
         }
     }
 
     private List<Instance> getDeadInstances() {
         List<Instance> result = new ArrayList<Instance>();
         for (Instance elem : Monitor.getInstances()) {
-            if (elem.getLifeTimeInMilliseconds() > Monitor.INSTANCE_LIFETIME)
+            if (elem.getMillisecondsSinceLastLifesign() > Monitor.INSTANCE_LIFETIME)
                 result.add(elem);
         }
         return result;

@@ -12,13 +12,14 @@ public class Instance {
     public static final int ALIVE = 1;
 
     private final String id;
-    private int status;
-    private final Date lastConnected;
+    private int status = ALIVE;
+
+    private Date onlineSince = new Date();
+    private Date offlineSince = null;
+    private Date lastConnected = new Date();
 
     public Instance(String id) {
         this.id = id;
-        this.status = 1;
-        this.lastConnected = new Date();
     }
 
     public String getId() {
@@ -29,16 +30,36 @@ public class Instance {
         return status;
     }
 
-    public long getLifeTimeInMilliseconds() {
-        return ((new Date().getTime() - this.getLastConnected().getTime()));
+    public long getMillisecondsSinceLastLifesign() {
+        return ((new Date().getTime() - this.lastConnected.getTime()));
     }
 
-    public Date getLastConnected() {
-        return lastConnected;
+    public long getSecondsOnline() {
+        return ((new Date().getTime() - this.onlineSince.getTime()) / 1000);
     }
 
-    void setStatusDead() {
-        this.status = DEAD;
+    public long getSecondsOffline() {
+        return ((new Date().getTime() - this.offlineSince.getTime()) / 1000);
+    }
+
+    void updateLastConnected() {
+        this.lastConnected = new Date();
+    }
+
+    void setAlive() {
+        if (this.status == DEAD) {
+            this.status = ALIVE;
+            this.offlineSince = null;
+            this.onlineSince = new Date();
+        }
+    }
+
+    void setDead() {
+        if (this.status == ALIVE) {
+            this.status = DEAD;
+            this.offlineSince = new Date();
+            this.onlineSince = null;
+        }
     }
 
     public String toString() {

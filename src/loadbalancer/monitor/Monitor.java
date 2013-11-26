@@ -12,15 +12,15 @@ public class Monitor extends Thread {
     static final int INSTANCE_CLEANUP_DELAY = 300;
     static final int INSTANCE_LIFETIME = 250;
 
-    private static Map<String, Instance> instances = new HashMap<String, Instance>();
+    static Map<String, Instance> instances = new HashMap<String, Instance>();
 
-    public static synchronized List<Instance> getInstances() {
+    public static List<Instance> getInstances() {
         List<Instance> result = new ArrayList<Instance>();
         result.addAll(instances.values());
         return result;
     }
 
-    public static synchronized List<Instance> getAliveInstances() {
+    public static List<Instance> getAliveInstances() {
         List<Instance> result = new ArrayList<Instance>();
         for (Instance elem : getInstances()) {
             if (elem.getStatus() != Instance.DEAD)
