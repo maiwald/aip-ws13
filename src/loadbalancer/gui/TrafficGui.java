@@ -26,7 +26,7 @@ public class TrafficGui extends javax.swing.JFrame {
         serverPanels = new ArrayList<ServerPanel>();
 
         for (Instance i : instances) {
-            serverPanels.add(new ServerPanel(this, i));
+            serverPanels.add(new ServerPanel(i));
         }
 
         for (JPanel p : serverPanels) {
