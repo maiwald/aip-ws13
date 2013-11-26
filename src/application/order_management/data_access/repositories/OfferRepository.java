@@ -6,12 +6,12 @@ import java.util.Map;
 import org.hibernate.Session;
 
 import util.SessionHelper;
-import application.materials_management.data_access.entities.Part;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.order_management.data_access.entities.Offer;
 
 public class OfferRepository {
 
-    public Offer createOffer(Integer customerId, Map<Part, Integer> partlist, Date validUntil, double price) {
+    public Offer createOffer(Integer customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) {
         Offer offer = new Offer(customerId, partlist, validUntil, price);
 
         this.getSession().save(offer);

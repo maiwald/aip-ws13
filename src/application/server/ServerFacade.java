@@ -70,7 +70,7 @@ public class ServerFacade implements ServerInstance {
     }
 
     @Override
-    public OfferDTO createOffer(int customerId, Map<Part, Integer> partlist, Date validUntil, double price) throws RemoteException {
+    public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException {
         return orderManagement.createOffer(customerId, partlist, validUntil, price);
     }
 

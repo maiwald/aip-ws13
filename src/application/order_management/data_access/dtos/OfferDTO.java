@@ -3,17 +3,17 @@ package application.order_management.data_access.dtos;
 import java.util.Date;
 import java.util.Map;
 
-import application.materials_management.data_access.entities.Part;
+import application.materials_management.data_access.dtos.PartDTO;
 
 public class OfferDTO {
 
     private Integer customerId;
-    private Map<Part, Integer> partlist;
+    private Map<PartDTO, Integer> partlist;
     private Date offerDate;
     private Date validUntil;
     private double price;
 
-    public OfferDTO(Integer customerId, Map<Part, Integer> partlist, Date offerDate, Date validUntil, double price) {
+    public OfferDTO(Integer customerId, Map<PartDTO, Integer> partlist, Date offerDate, Date validUntil, double price) {
         this.customerId = customerId;
         this.partlist = partlist;
         this.offerDate = offerDate;
@@ -25,7 +25,7 @@ public class OfferDTO {
         return customerId;
     }
 
-    public Map<Part, Integer> getPartlist() {
+    public Map<PartDTO, Integer> getPartlist() {
         return partlist;
     }
 

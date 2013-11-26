@@ -6,7 +6,7 @@ import java.util.Map;
 import org.hibernate.Session;
 
 import util.SessionHelper;
-import application.materials_management.data_access.entities.Part;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.order_management.business_logic.OfferCreator;
 import application.order_management.business_logic.OrderCreator;
 import application.order_management.data_access.dtos.OfferDTO;
@@ -33,7 +33,7 @@ public class OrderManagementFacade implements OrderManagement {
     }
 
     @Override
-    public OfferDTO createOffer(Integer customerId, Map<Part, Integer> partlist, Date validUntil, double price){
+    public OfferDTO createOffer(Integer customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price){
         Session session = this.getSession();
         session.beginTransaction();
         Offer offer = offerCreator.createOffer(customerId, partlist, validUntil, price);

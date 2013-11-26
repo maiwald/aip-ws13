@@ -12,7 +12,7 @@ import application.order_management.data_access.dtos.OrderDTO;
 public interface ServerInstance extends Remote {
     public OrderDTO createOrder(int offerId) throws RemoteException;
 
-    public OfferDTO createOffer(int customerId, Map<Part, Integer> partlist, Date validUntil, double price) throws RemoteException;
+    public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException;
 
     public void start() throws RemoteException;
 
