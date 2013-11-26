@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Map;
 
 import loadbalancer.monitor.Monitor;
-import application.materials_management.data_access.entities.Part;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.materials_management.facades.MaterialsManagement;
 import application.materials_management.facades.MaterialsManagementFacade;
 import application.order_management.data_access.dtos.OfferDTO;

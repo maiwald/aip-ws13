@@ -5,20 +5,18 @@ import java.rmi.registry.Registry;
 
 import loadbalancer.gui.LoadBalancerGUI;
 import loadbalancer.monitor.Monitor;
-import application.server.ServerFacade;
 
 public class LoadBalancer {
 
     public static void main(String[] args) {
         try {
-            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             new Monitor();
 
             Dispatcher dispatcher = new Dispatcher();
+            registry.bind("MPS", dispatcher);
 
             Thread.sleep(10000);
-
-            dispatcher.mett();
 
             new LoadBalancerGUI().start();
 

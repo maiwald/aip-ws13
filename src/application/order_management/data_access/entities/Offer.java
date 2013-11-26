@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import application.materials_management.data_access.dtos.PartDTO;
-import application.materials_management.data_access.entities.Part;
 import application.order_management.data_access.dtos.OfferDTO;
 
 @Entity

@@ -1,32 +1,38 @@
 package loadbalancer;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import loadbalancer.monitor.Instance;
 import loadbalancer.monitor.Monitor;
+import application.materials_management.data_access.dtos.PartDTO;
+import application.order_management.data_access.dtos.OfferDTO;
 import application.order_management.data_access.dtos.OrderDTO;
 import application.server.ServerInstance;
 
-public class Dispatcher {
+public class Dispatcher implements ServerInstance, Serializable {
 
     private int callCount = 0;
 
-    public OrderDTO createOrder(int offerId) {
-        OrderDTO result = null;
-        try {
-            result = getNextInstance().createOrder(offerId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+    @Override
+    public OrderDTO createOrder(int offerId) throws RemoteException {
+        return getNextInstance().createOrder(offerId);
     }
 
-    public void mett() {
-        try {
-            getNextInstance().mett();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException {
+        return getNextInstance().createOffer(customerId, partlist, validUntil, price);
+    }
+
+    @Override
+    public void start() throws RemoteException {
+    }
+
+    @Override
+    public void stop() throws RemoteException {
     }
 
     private ServerInstance getNextInstance() {
@@ -38,4 +44,5 @@ public class Dispatcher {
         Instance instance = instances.get(this.callCount % instances.size());
         return instance.getStub();
     }
+
 }

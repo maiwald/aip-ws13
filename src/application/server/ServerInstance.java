@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Map;
 
-import application.materials_management.data_access.entities.Part;
+import application.materials_management.data_access.dtos.PartDTO;
 import application.order_management.data_access.dtos.OfferDTO;
 import application.order_management.data_access.dtos.OrderDTO;
 
