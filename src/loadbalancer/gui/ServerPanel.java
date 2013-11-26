@@ -17,7 +17,7 @@ public class ServerPanel extends JPanel {
         super();
         this.instance = instance;
 
-        setLayout(new java.awt.GridLayout(3, 1));
+        setLayout(new java.awt.GridLayout(1, 3));
         trafficLight.setBackground(new java.awt.Color(255, 0, 0));
         GroupLayout trafficLightLayout = new GroupLayout(trafficLight);
         trafficLight.setLayout(trafficLightLayout);
