@@ -21,9 +21,11 @@ public class ServerFacade implements ServerInstance {
 
     private static SecureRandom random = new SecureRandom();
 
-    private final String serverId;
-    private final String monitorHost;
-    private final int monitorPort;
+    boolean running = true;
+
+    final String serverId;
+    final String monitorHost;
+    final int monitorPort;
 
     private Thread ekg;
 
@@ -65,13 +67,14 @@ public class ServerFacade implements ServerInstance {
 
     @Override
     public void start() throws RemoteException {
-        this.ekg = new ServerEKG(this.serverId, this.monitorHost, this.monitorPort);
+        this.ekg = new ServerEKG(this);
+        this.running = true;
         this.ekg.start();
     }
 
     @Override
     public void stop() throws RemoteException {
-        this.ekg.interrupt();
+        this.running = false;
     }
 
     @Override

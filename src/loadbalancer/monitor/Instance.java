@@ -1,8 +1,5 @@
 package loadbalancer.monitor;
 
-import java.rmi.AccessException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Date;
@@ -32,8 +29,8 @@ public class Instance {
         return status;
     }
 
-    public long getLifeTimeInSeconds() {
-        return ((new Date().getTime() - this.getLastConnected().getTime()) / 1000);
+    public long getLifeTimeInMilliseconds() {
+        return ((new Date().getTime() - this.getLastConnected().getTime()));
     }
 
     public Date getLastConnected() {

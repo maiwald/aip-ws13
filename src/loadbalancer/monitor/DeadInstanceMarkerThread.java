@@ -7,7 +7,7 @@ class DeadInstanceMarkerThread extends Thread {
     public void run() {
         try {
             while (true) {
-                sleep(Monitor.INSTANCE_CLEANUP_DELAY * 1000);
+                sleep(Monitor.INSTANCE_CLEANUP_DELAY);
                 setDeadInstances();
             }
         } catch (InterruptedException e) {
@@ -24,7 +24,7 @@ class DeadInstanceMarkerThread extends Thread {
     private List<Instance> getDeadInstances() {
         List<Instance> result = new ArrayList<Instance>();
         for (Instance elem : Monitor.getInstances()) {
-            if (elem.getLifeTimeInSeconds() > Monitor.INSTANCE_LIFETIME)
+            if (elem.getLifeTimeInMilliseconds() > Monitor.INSTANCE_LIFETIME)
                 result.add(elem);
         }
         return result;

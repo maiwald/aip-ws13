@@ -9,8 +9,8 @@ public class Monitor extends Thread {
 
     public static final int SERVER_PORT = 65001;
 
-    static final int INSTANCE_CLEANUP_DELAY = 3;
-    static final int INSTANCE_LIFETIME = 10;
+    static final int INSTANCE_CLEANUP_DELAY = 300;
+    static final int INSTANCE_LIFETIME = 250;
 
     private static Map<String, Instance> instances = new HashMap<String, Instance>();
 

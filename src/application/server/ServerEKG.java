@@ -5,22 +5,17 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 class ServerEKG extends Thread {
-    private final String serverId;
-    private final String monitorHost;
-    private final int monitorPort;
+    private final ServerFacade serverFacade;
 
-    public ServerEKG(String serverId, String monitorHost, int monitorPort) {
-        this.serverId = serverId;
-        this.monitorHost = monitorHost;
-        this.monitorPort = monitorPort;
-
+    public ServerEKG(ServerFacade serverFacade) {
+        this.serverFacade = serverFacade;
     }
 
     public void run() {
         try {
-            while (!Thread.interrupted()) {
-                sendLifeSign(this.serverId);
-                Thread.sleep(2 * 1000);
+            while (this.serverFacade.running) {
+                sendLifeSign(this.serverFacade.serverId);
+                Thread.sleep(200);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -28,7 +23,7 @@ class ServerEKG extends Thread {
     }
 
     public void sendLifeSign(String serverId) throws IOException {
-        Socket socket = new Socket(this.monitorHost, this.monitorPort);
+        Socket socket = new Socket(this.serverFacade.monitorHost, this.serverFacade.monitorPort);
         OutputStream out = socket.getOutputStream();
         out.write(serverId.getBytes());
         out.close();
