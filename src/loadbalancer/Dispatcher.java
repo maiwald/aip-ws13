@@ -19,12 +19,12 @@ public class Dispatcher implements ServerInstance, Serializable {
 
     @Override
     public OrderDTO createOrder(int offerId) throws RemoteException {
-        return getNextInstance().createOrder(offerId);
+        return this.getNextInstance().createOrder(offerId);
     }
 
     @Override
     public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException {
-        return getNextInstance().createOffer(customerId, partlist, validUntil, price);
+        return this.getNextInstance().createOffer(customerId, partlist, validUntil, price);
     }
 
     @Override

@@ -2,7 +2,9 @@ package loadbalancer;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
+import application.server.ServerInstance;
 import loadbalancer.gui.LoadBalancerGUI;
 import loadbalancer.monitor.Monitor;
 
@@ -14,7 +16,8 @@ public class LoadBalancer {
             new Monitor();
 
             Dispatcher dispatcher = new Dispatcher();
-            registry.bind("MPS", dispatcher);
+            ServerInstance stub = (ServerInstance) UnicastRemoteObject.exportObject(dispatcher, 0);
+            registry.rebind("MPS", stub);
 
             Thread.sleep(10000);
 

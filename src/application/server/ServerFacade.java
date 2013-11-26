@@ -44,7 +44,7 @@ public class ServerFacade implements ServerInstance {
 
         try {
             ServerInstance stub = (ServerInstance) UnicastRemoteObject.exportObject(this, 0);
-            Registry registry = LocateRegistry.getRegistry();
+            Registry registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
             registry.bind(this.getId(), stub);
             this.start();
         } catch (Exception e) {
@@ -66,11 +66,13 @@ public class ServerFacade implements ServerInstance {
 
     @Override
     public OrderDTO createOrder(int offerId) throws RemoteException {
+        this.logRequest("createOrder");
         return orderManagement.createOrder(offerId);
     }
 
     @Override
     public OfferDTO createOffer(int customerId, Map<PartDTO, Integer> partlist, Date validUntil, double price) throws RemoteException {
+        this.logRequest("createOffer");
         return orderManagement.createOffer(customerId, partlist, validUntil, price);
     }
 
@@ -84,6 +86,10 @@ public class ServerFacade implements ServerInstance {
     @Override
     public void stop() throws RemoteException {
         this.running = false;
+    }
+
+    private void logRequest(String method) {
+        System.out.format("%s received %s.\n", this.serverId, method);
     }
 
 }

@@ -11,7 +11,7 @@ import application.server.ServerInstance;
 public class Client {
     public static void main(String[] args) {
         try {
-            Registry registry = LocateRegistry.getRegistry();
+            Registry registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
             ServerInstance server = (ServerInstance) registry.lookup("MPS");
             server.createOffer(133, new HashMap<PartDTO, Integer>(), new Date(), 4.8);
             server.createOrder(123);
