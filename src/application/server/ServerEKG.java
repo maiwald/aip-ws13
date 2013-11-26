@@ -15,7 +15,7 @@ class ServerEKG extends Thread {
         try {
             while (this.serverFacade.running) {
                 sendLifeSign(this.serverFacade.serverId);
-                Thread.sleep(2 * 1000);
+                Thread.sleep(200);
             }
         } catch (Exception e) {
             e.printStackTrace();
