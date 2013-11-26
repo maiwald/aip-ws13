@@ -69,23 +69,5 @@ public class TrafficGui extends javax.swing.JFrame {
         }
     }
 
-    public static void main(String args[]) {
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println("kannste knicken do");
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                List<Instance> instances = Monitor.getInstances();
-                new TrafficGui(instances).setVisible(true);
-            }
-        });
-    }
 
 }

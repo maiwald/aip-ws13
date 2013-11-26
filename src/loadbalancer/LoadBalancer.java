@@ -3,9 +3,9 @@ package loadbalancer;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import application.server.ServerFacade;
-import loadbalancer.gui.TrafficGui;
+import loadbalancer.gui.LoadBalancerGUI;
 import loadbalancer.monitor.Monitor;
+import application.server.ServerFacade;
 
 public class LoadBalancer {
 
@@ -13,15 +13,14 @@ public class LoadBalancer {
         try {
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             new Monitor();
+
             Dispatcher dispatcher = new Dispatcher();
 
-            new ServerFacade("localhost", Monitor.SERVER_PORT).start();
-            new ServerFacade("localhost", Monitor.SERVER_PORT).start();
+            Thread.sleep(10000);
 
             dispatcher.mett();
 
-            TrafficGui gui = new TrafficGui(Monitor.getInstances());
-            gui.setVisible(true);
+            new LoadBalancerGUI().start();
 
         } catch (Exception e) {
             e.printStackTrace();
