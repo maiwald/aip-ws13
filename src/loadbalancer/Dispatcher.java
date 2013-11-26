@@ -31,8 +31,11 @@ public class Dispatcher {
 
     private ServerInstance getNextInstance() {
         List<Instance> instances = Monitor.getAliveInstances();
-        Instance instance = instances.get(this.callCount % instances.size());
+        if (instances.size() == 0)
+            return null;
+
         this.callCount++;
+        Instance instance = instances.get(this.callCount % instances.size());
         return instance.getStub();
     }
 }
